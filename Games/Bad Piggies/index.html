@@ -1,0 +1,486 @@
+<html lang="en"><head><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5JZHSM4RCW"></script><script src="//www.google.com/jsapi"></script><script>window.parent.maeExportApis_();</script>
+
+
+  <base href="https://cdn.jsdelivr.net/gh/StaticQuasar931/Bad-Piggies@main/">
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Play Bad Piggies unblocked on StaticQuasar931 Games. This school friendly browser game is working at school, playable at school, and runs on Chromebook, desktop, and modern browsers at school, work, and home.">
+  <meta name="keywords" content="Bad Piggies unblocked, Bad Piggies school, Bad Piggies working at school, Bad Piggies play at school, Bad Piggies school friendly, Bad Piggies Chromebook, bad piggies browser game, bad piggies unity webgl, bad piggies at school, bad piggies unbl0cked, bad pigies, unblocked games, school games, browser games for school, Chromebook games, static, staticquasar, staticquasar931, static 931, 931, staticq, staticq931">
+  <meta property="og:title" content="Bad Piggies Unblocked | StaticQuasar931 Games">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bad Piggies Unblocked | StaticQuasar931 Games">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="">
+  <link rel="canonical" href="">
+  <link rel="icon" type="image/png" href="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/StaticQuasar931/Bad-Piggies@main/TemplateData/style.css">
+
+  <title>Bad Piggies</title>
+
+  
+  <script>
+    (function loadGAForGoogleSites(w, d, id){
+      w.dataLayer = w.dataLayer || [];
+      w.gtag = w.gtag || function(){ w.dataLayer.push(arguments); };
+
+      w.gtag('js', new Date());
+
+      var s = d.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+
+      var first = d.getElementsByTagName('script')[0];
+      (first && first.parentNode ? first.parentNode : d.head || d.documentElement).insertBefore(s, first || null);
+
+      w.gtag('config', id, {
+        cookie_domain: (w.location && w.location.hostname) ? w.location.hostname : 'auto',
+        cookie_flags: 'SameSite=None;Secure',
+        send_page_view: true
+      });
+    })(window, document, 'G-5JZHSM4RCW');
+  </script>
+
+  <style>
+    :root{
+      --brand:#5ee1ff;
+      --glow:0 0 12px rgba(94,225,255,.65), 0 0 32px rgba(155,255,183,.35);
+      --shadow:0 10px 30px rgba(0,0,0,.4);
+    }
+
+    html, body{
+      margin:0;
+      padding:0;
+      width:100%;
+      height:100%;
+      background:#000;
+      color:#eaf4ff;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      overflow:hidden;
+    }
+
+    body{
+      position:relative;
+      background:#000;
+    }
+
+    .webgl-content{
+      position:fixed;
+      inset:0;
+      width:100vw;
+      height:100vh;
+      background:#000;
+      overflow:hidden;
+    }
+
+    #gameShell{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      background:#000;
+    }
+
+    #gameContainer{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      background:#000;
+      overflow:hidden;
+    }
+
+    #gameContainer canvas{
+      position:absolute !important;
+      left:50% !important;
+      top:50% !important;
+      transform:translate(-50%, -50%) !important;
+      transform-origin:center center !important;
+      margin:0 !important;
+      display:block !important;
+    }
+
+    #gameContainer .logo,
+    #gameContainer .logo.Dark{
+      background-image:url("https://cdn.jsdelivr.net/gh/StaticQuasar931/Bad-Piggies@main/TemplateData/progressLogo.Dark.png") !important;
+      background-repeat:no-repeat !important;
+      background-position:center center !important;
+      background-size:contain !important;
+    }
+
+    #staticMenu{
+      position:fixed;
+      left:12px;
+      bottom:12px;
+      z-index:9999;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      user-select:none;
+      padding:10px 14px;
+      border-radius:12px;
+      background:linear-gradient(135deg, rgba(20,20,28,.9), rgba(20,20,28,.6));
+      border:1px solid rgba(94,225,255,.35);
+      color:#e8f3ff;
+      box-shadow:var(--glow), var(--shadow);
+      font-size:14px;
+      animation:menuEnter .6s ease .15s both;
+    }
+
+    #staticMenu a{
+      color:#5ee1ff;
+      font-weight:800;
+      text-decoration:none;
+    }
+
+    #closeStaticMenu{
+      color:#f55;
+      cursor:pointer;
+      padding:2px 6px;
+      border-radius:6px;
+      border:1px solid rgba(255,255,255,.15);
+      background:rgba(255,255,255,.06);
+    }
+
+    @keyframes menuEnter{
+      from{opacity:0; transform:translateY(-8px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    #staticSlideMenu{
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      z-index:9999;
+      width:100px;
+      height:100px;
+      pointer-events:none;
+      opacity:0;
+      transform:translateX(140px) scale(.96);
+      display:block;
+    }
+
+    #staticSlideMenu a{
+      display:block;
+      width:100%;
+      height:100%;
+    }
+
+    #staticSlideMenu img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      box-shadow:none;
+      transition:opacity .25s ease;
+    }
+
+    .slide-in{
+      animation:slideIn 2s ease forwards;
+    }
+
+    .slide-out{
+      animation:slideOut 2s ease forwards;
+    }
+
+    @keyframes slideIn{
+      from{opacity:0; transform:translateX(140px) scale(.96)}
+      to{opacity:1; transform:translateX(0) scale(1)}
+    }
+
+    @keyframes slideOut{
+      from{opacity:1; transform:translateX(0) scale(1)}
+      to{opacity:0; transform:translateX(140px) scale(.96)}
+    }
+
+    .seo-hidden{
+      position:absolute;
+      width:1px;
+      height:1px;
+      overflow:hidden;
+      clip:rect(1px,1px,1px,1px);
+      white-space:nowrap;
+      clip-path:inset(50%);
+    }
+
+    @media (max-width:600px){
+      #staticMenu{
+        font-size:13px;
+        padding:8px 12px;
+        max-width:calc(100vw - 24px);
+      }
+
+      #staticSlideMenu{
+        width:88px;
+        height:88px;
+      }
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/gh/StaticQuasar931/Bad-Piggies@main/TemplateData/UnityProgress.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/StaticQuasar931/Bad-Piggies@main/Build/UnityLoader.js"></script>
+</head>
+<body>
+
+  <div class="webgl-content">
+    <div id="gameShell">
+      <div id="gameContainer" style="padding: 0px; margin: 0px; border: 0px; background: rgb(35, 31, 32);"><canvas id="#canvas" style="left: 50%; top: 50%; transform: translate(-50%, -50%); position: absolute; margin: 0px; display: block; cursor: url(&quot;data:image/cur;base64,AAACAAEAICAAAAAAAAAoEAAAGAAAAAAAKAAAACAAAABAAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAQAAAAAAAAAAAgAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABFLy8v6x8fH/82Njb+SEhI9xoaGtoEBASPAAAAJAAAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEBAwAAAEQCAgKLAgICewAAACoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJOIiIj/////////////////4ODg/3t7e/8ICAi9AAAATgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABrKioq/4WFhf9qamr/FxcX5AAAAHcAAAAlAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQEBxsDAwP//////////////////////0tLS/xcXF8kAAABeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABkZGeHHx8f////////////Gxsb/XV1d/xkZGeIAAACaAAAAaAAAAEsAAABGAAAAVgAAAGEAAABXAAAAIQAAAF5BQUHw6+vr//////////////////////+VlZX/AAAAlgAAACIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANDQ09f7+/v///////v7+////////////0dHR/42Njf9fX1//RUVF/z8/P/9NTU3/WVlZ/1JSUv8kJCTnAAAA6qKiov//////////////////////3t7e/yUlJeIAAAAyAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPDw+6sbGx///////////////////////////////////////19fX/8fHx//n5+f///////////9bW1v+vr6//7Ozs//////////////////////+CgoL/AAAAhwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEwkJCT/y8vL///////////////////////////////////////////////////////////////////////+/v7/////////////////3Nzc/xISEuQAAAAyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE8ODg7YVFRU/4WFhf+Wlpb/mZmZ/5ubm/+8vLz//f39///////////////////////////////////////////////////////19fX/ZWVl/wAAAJ8AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABYAAABKAAAAdwICAooFBQWPBgYGkhAQELxjY2P++Pj4///////////////////////////////////////////////////////u7u7/SkpK/wAAAGkAAAANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAUAAAADAAAAGg8PD7m2trb///////////////////////////////////////////////////////////+qqqr/AAAAsgAAADsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECAgIj5qamv///////////////////////////////////////////////////////////9bW1v8fHx/WAAAAcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4UFBTIzMzM////////////////////////////////////////////////////////////7Ozs/0NDQ/MGBgaeBgYGAAYGBgAGBgYABgYGAAYGBgAGBgYABgYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWVFRUfz////////////////////////////////////////////////////////////////4+Pj/V1dX/wkJCbQJCQkACQkJAAkJCQAJCQkACQkJAAkJCQAJCQkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMKCgrEubm5//////////////////////////////////////////////////////////////////n5+f9YWFj/CgoKuAoKCgAKCgoACgoKAAoKCgAKCgoACgoKAAoKCgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVkZGRvX6+vr////////////9/f3//f39//////////////////7+/v//////////////////////7+/v/0dHR/cHBwekBwcHAAcHBwAHBwcABwcHAAcHBwAHBwcABwcHAAEBAQABAQEAAQEBAAEBAQABAQEAAQEBAAEBAQABAQHEurq6////////////9vb2/9bW1v/t7e3///////////////////////7+/v/////////////////T09P/GRkZ1AAAAG4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWklJSfTz8/P////////////X19f/oqKi//39/f/////////////////t7e3/8PDw//7+/v///////////5SUlP8AAACgAAAAJwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADEvr6+/////////////////5ubm/9xcXH//////////////////////39/f//ExMT////////////Pz8//FhYW4QAAADEAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYlhYWPnz8/P////////////y8vL/PDw8/zQ0NP////////////////+2trb/DQ0N9k1NTf3f39//t7e3/y4uLvcAAABeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4DAwPLxcXF/////////////////8rKyv8BAQHLAAAAp1BQUP+qqqr/gICA/xUVFeQAAABVAQEBgh8fH90TExO+AAAASwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdWlpaf/7+/v////////////9/f3/fn5+/wAAAHcAAAAAAQEBXwcHB5kEBASAAAAAKQAAAAAAAAAEAAAAFwAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB8SEhLSzs7O/////////////////+bm5v8nJyfhAAAAKAAAAAABAQEAAAAABQAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiHl5ef//////////////////////qamp/wAAAKgAAAAAAAAAAAEBAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADcqKirr3Nzc//////////////////b29v9PT0/yAAAAUQAAAAAAAAAAAQEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAk4+Pj///////////////////////09PT/w0NDdEAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADc4ODj06+vr//////////////////////+CgoL9AQEBgwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeYKCgv///////////////////////Pz8/zQ0NPEAAAAuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQWFha8wsLC///////////////////////Gxsb/Dw8PxAAAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJzMzM+Xu7u7//////////////////////1paWv8AAABlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkKioq3eDg4P////////////////+goKD/CQkJwAAAABEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPXFxc/9jY2P/d3d3/hoaG/w0NDdkAAAAuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABADAwN8FBQUzBcXF9EEBASRAAAAIwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=&quot;), default; width: 1365px; height: 683px;" width="1365" height="683"></canvas><div class="logo Dark" style="display: none;"></div><div class="progress Dark" style="display: none;"><div class="empty" style="width: 0%;"></div><div class="full" style="width: 100%;"></div></div></div>
+    </div>
+  </div>
+
+  <div id="" role="region" aria-label="StaticQuasar931 menu" style="display: flex;">
+    <a href="" target="_blank" rel="noopener"></a>
+    <span id="closeStaticMenu" title="Hide temporarily">✕</span>
+  </div>
+
+  
+
+  <div class="seo-hidden" aria-hidden="true">
+    <h1></h1>
+    <p>
+      
+    </p>
+  </div>
+
+  <script>
+    console.log("");
+
+    window.onbeforeunload = function () {
+      return "Are you sure you want to leave? Your session may be interrupted.";
+    };
+
+    function replaceBadProgressLogo() {
+      var badUrl = "https://cdn.jsdelivr.net/gh/67-Factory/web-ports@main/badpiggies/TemplateData/progressLogo.Dark.png";
+      var goodUrl = "https://cdn.jsdelivr.net/gh/StaticQuasar931/Bad-Piggies@main/TemplateData/progressLogo.Dark.png";
+
+      var imgs = document.querySelectorAll("img");
+      for (var i = 0; i < imgs.length; i++) {
+        var src = imgs[i].getAttribute("src") || "";
+        if (src.indexOf(badUrl) !== -1) {
+          imgs[i].setAttribute("src", goodUrl);
+        }
+      }
+
+      var nodes = document.querySelectorAll("*");
+      for (var j = 0; j < nodes.length; j++) {
+        var bg = window.getComputedStyle(nodes[j]).backgroundImage || "";
+        if (bg.indexOf(badUrl) !== -1) {
+          nodes[j].style.backgroundImage = 'url("' + goodUrl + '")';
+        }
+      }
+    }
+
+    function fitUnityCanvas() {
+      var container = document.getElementById("gameContainer");
+      if (!container) return;
+
+      var canvas = container.querySelector("canvas");
+      if (!canvas) return;
+
+      var baseWidth = parseInt(canvas.getAttribute("width"), 10) || canvas.width || 960;
+      var baseHeight = parseInt(canvas.getAttribute("height"), 10) || canvas.height || 600;
+
+      var screenWidth = window.innerWidth;
+      var screenHeight = window.innerHeight;
+
+      var scale = Math.min(screenWidth / baseWidth, screenHeight / baseHeight);
+      var renderWidth = Math.round(baseWidth * scale);
+      var renderHeight = Math.round(baseHeight * scale);
+
+      canvas.style.width = renderWidth + "px";
+      canvas.style.height = renderHeight + "px";
+      canvas.style.left = "50%";
+      canvas.style.top = "50%";
+      canvas.style.transform = "translate(-50%, -50%)";
+      canvas.style.position = "absolute";
+      canvas.style.margin = "0";
+      canvas.style.display = "block";
+    }
+
+    function watchUnityElements() {
+      var container = document.getElementById("gameContainer");
+      if (!container) return;
+
+      var observer = new MutationObserver(function () {
+        replaceBadProgressLogo();
+        fitUnityCanvas();
+      });
+
+      observer.observe(container, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ["style", "src", "class"]
+      });
+
+      setInterval(function () {
+        replaceBadProgressLogo();
+        fitUnityCanvas();
+      }, 250);
+    }
+
+    watchUnityElements();
+    window.addEventListener("resize", fitUnityCanvas);
+
+    window.gameInstance = UnityLoader.instantiate(
+      "gameContainer",
+      "https://cdn.jsdelivr.net/gh/StaticQuasar931/Bad-Piggies@main/Build/Bad%20Piggies.json",
+      {
+        onProgress: UnityProgress
+      }
+    );
+
+    (function () {
+      var menu = document.getElementById("");
+      var btn = document.getElementById("");
+      var KEY = "";
+
+      function showMenu() {
+        if (menu) menu.style.display = "flex";
+      }
+
+      function hideFor3Minutes() {
+        if (!menu) return;
+        menu.style.display = "none";
+        var until = Date.now() + 180000;
+        try {
+          localStorage.setItem(KEY, String(until));
+        } catch (e) {}
+        setTimeout(showMenu, 180000);
+      }
+
+      var until = 0;
+      try {
+        until = parseInt(localStorage.getItem(KEY) || "0", 10);
+      } catch (e) {
+        until = 0;
+      }
+
+      if (until && Date.now() < until) {
+        if (menu) menu.style.display = "none";
+        setTimeout(showMenu, until - Date.now());
+      } else {
+        showMenu();
+      }
+
+      if (btn) {
+        btn.onclick = hideFor3Minutes;
+      }
+    })();
+
+    (function () {
+      var wrap = document.getElementById("");
+      var link = document.getElementById("");
+      var img = document.getElementById("");
+
+      var FORM = {
+        src: "",
+        alt: "",
+        link: ""
+      };
+
+      var DISCORD = {
+       
+      };
+
+      var INSTA = {
+        
+      };
+
+      var ROTATION = [FORM, DISCORD, INSTA];
+      var idx = 0;
+      var T_IN = 2000;
+      var T_SHOW = 5000;
+      var T_OUT = 2000;
+      var T_HIDDEN = 20000;
+
+      for (var i = 0; i < ROTATION.length; i++) {
+        var preload = new Image();
+        preload.src = ROTATION[i].src;
+      }
+
+      function applyState(state) {
+        link.href = state.link;
+        link.setAttribute("aria-label", state.alt);
+        img.alt = state.alt;
+        img.style.opacity = "0";
+        setTimeout(function () {
+          img.src = state.src;
+          img.style.opacity = "1";
+        }, 80);
+      }
+
+      function delay(ms) {
+        return new Promise(function (resolve) {
+          setTimeout(resolve, ms);
+        });
+      }
+
+      async function cycle() {
+        while (true) {
+          applyState(ROTATION[idx]);
+          wrap.style.pointerEvents = "auto";
+          wrap.classList.remove("slide-out");
+          wrap.classList.add("slide-in");
+
+          await delay(T_IN + T_SHOW);
+
+          wrap.classList.remove("slide-in");
+          wrap.classList.add("slide-out");
+
+          await delay(T_OUT);
+
+          wrap.style.pointerEvents = "none";
+
+          await delay(T_HIDDEN);
+
+          idx = (idx + 1) % ROTATION.length;
+        }
+      }
+
+      cycle();
+    })();
+
+    (function () {
+      var idsToToggle = ["staticMenu", "staticSlideMenu"];
+      var seq = [];
+      var target = ["y", "u", "i"];
+
+      function toggleAllVisualSeo() {
+        for (var i = 0; i < idsToToggle.length; i++) {
+          var el = document.getElementById(idsToToggle[i]);
+          if (!el) continue;
+
+          var currentlyHidden = el.style.display === "none" || window.getComputedStyle(el).display === "none";
+
+          if (currentlyHidden) {
+            el.style.display = idsToToggle[i] === "staticMenu" ? "flex" : "block";
+          } else {
+            el.style.display = "none";
+          }
+        }
+      }
+
+      window.addEventListener("keydown", function (e) {
+        seq.push(String(e.key || "").toLowerCase());
+        if (seq.length > 3) seq.shift();
+
+        if (seq.join("") === target.join("")) {
+          toggleAllVisualSeo();
+        }
+      });
+    })();
+  </script>
+
+
+<script src="blob:https://n-fizdsl5n65xgkjpfijfq3u22lv3b2cvmkdi7jci-0lu-script.googleusercontent.com/4535da9f-08d4-404a-8253-9b7ac4c482f3"></script></body></html>
