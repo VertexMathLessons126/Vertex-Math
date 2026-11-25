@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Drift Hunters</title>
+  <style>
+    html, body { margin: 0 auto; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
+    .webgl-content { position: absolute; }
+    .webgl-content,
+    #gameContainer,
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+      border: 0;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="webgl-content">
+    <div id="gameContainer"></div>
+  </div>
+
+  <!-- Unity loader + game data -->
+  <script src="https://rawcdn.githack.com/BabBrek/Hodgeus-/b254f05ed8f75328ba3e3a3dd589c8b03d38e6ea/g@me$/drifthunters/UnityLoader2019.js"></script>
+  <script>
+    var gameInstance = UnityLoader.instantiate(
+      "gameContainer",
+      "https://rawcdn.githack.com/BabBrek/Hodgeus-/b254f05ed8f75328ba3e3a3dd589c8b03d38e6ea/g@me$/drifthunters/dh.json"
+    );
+
+    function UnityProgress(gameInstance, progress) {
+      if (!gameInstance.Module) {
+        return;
+      }
+    }
+  </script>
+</body>
+</html>
