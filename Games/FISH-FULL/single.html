@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
+    <title>Google Docs</title>
+    <link rel="icon" href="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html, body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        user-select: none;
+      }
+
+      #unity-canvas {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        display: block;
+        outline: none;
+        background: #000;
+      }
+
+      #hud-bar {
+        position: fixed;
+        top: 12px;
+        right: 12px;
+        display: flex;
+        gap: 8px;
+        z-index: 999999;
+        opacity: 0.45;
+        transition: opacity 0.2s ease;
+      }
+
+      #hud-bar:hover {
+        opacity: 1;
+      }
+
+      .hud-btn {
+        background-color: #111;
+        color: #fff;
+        border: 2px solid #ff9900;
+        font-size: 11px;
+        font-family: 'Audiowide', sans-serif;
+        padding: 6px 12px;
+        cursor: pointer;
+        border-radius: 6px;
+        letter-spacing: 0.8px;
+        box-shadow: 0 0 8px rgba(255, 153, 0, 0.4);
+        transition: all 0.25s ease;
+      }
+
+      .hud-btn:hover {
+        background-image: linear-gradient(270deg, red, orange, yellow);
+        background-size: 300% 300%;
+        animation: fireInside 3s linear infinite;
+        color: #fff;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+        box-shadow: inset 0 0 10px rgba(255, 165, 0, 0.4), 0 0 14px #ff9900;
+      }
+
+      .hud-btn:active {
+        transform: scale(0.96);
+      }
+
+      @keyframes fireInside {
+        0%   { background-position: 0% 50%; }
+        50%  { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      #loader-overlay {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.92);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: #ffffff;
+        z-index: 20;
+        transition: opacity 0.35s ease;
+        padding: 20px;
+        text-align: center;
+      }
+
+      #loader-title {
+        font-family: 'Audiowide', sans-serif;
+        font-size: 30px;
+        letter-spacing: 2px;
+        color: #ff9900;
+        text-shadow: 0 0 12px rgba(255, 153, 0, 0.5);
+        margin-bottom: 6px;
+      }
+
+      #loader-sub {
+        font-size: 13px;
+        color: #9ca3af;
+        margin-bottom: 22px;
+      }
+
+      #progress-track {
+        width: min(440px, 84vw);
+        height: 14px;
+        background: #1a1a1a;
+        border: 2px solid #ff9900;
+        border-radius: 999px;
+        overflow: hidden;
+        box-shadow: 0 0 12px rgba(255, 153, 0, 0.3);
+      }
+
+      #progress-fill {
+        width: 0%;
+        height: 100%;
+        background-image: linear-gradient(270deg, red, orange, yellow);
+        background-size: 300% 300%;
+        animation: fireInside 3s linear infinite;
+        transition: width 0.12s ease-out;
+      }
+
+      #loader-status {
+        margin-top: 10px;
+        font-size: 12px;
+        font-family: monospace;
+        color: #d1d5db;
+      }
+
+      #unity-warning {
+        position: fixed;
+        top: 54px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 200;
+        color: #000;
+        font-weight: bold;
+        border-radius: 6px;
+        overflow: hidden;
+      }
+
+      #error-box {
+        display: none;
+        margin-top: 14px;
+        padding: 12px 16px;
+        max-width: min(500px, 88vw);
+        background: #dc2626;
+        color: #fff;
+        border-radius: 8px;
+        font-size: 13px;
+        text-align: center;
+        line-height: 1.4;
+      }
+
+      #retry-btn {
+        display: none;
+        margin-top: 10px;
+        background: #ff9900;
+        color: #000;
+        border: none;
+        border-radius: 6px;
+        padding: 7px 14px;
+        font-family: 'Audiowide', sans-serif;
+        font-size: 11px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="hud-bar">
+      <button class="hud-btn" id="btn-ab" onclick="openCloaked()">about:blank</button>
+      <button class="hud-btn" id="btn-fs" onclick="toggleFullscreen()">Fullscreen</button>
+    </div>
+
+    <canvas id="unity-canvas" tabindex="-1"></canvas>
+    <div id="unity-warning"></div>
+
+    <div id="loader-overlay">
+      <div id="loader-title">FISH WEBPORT</div>
+      <div id="loader-sub">dmcaguy &bull; WebGL Port</div>
+      <div id="progress-track">
+        <div id="progress-fill"></div>
+      </div>
+      <div id="loader-status">Initializing...</div>
+      <div id="error-box"></div>
+      <button id="retry-btn" onclick="location.reload()">Retry</button>
+    </div>
+
+    <script>
+      const REPO_ROOT = "https://cdn.jsdelivr.net/gh/AlexBoops/fish-rip@main";
+      const CDN_BUILD = REPO_ROOT + "/Build";
+
+      const WASM_CHUNKS = Array.from({ length: 4 }, (_, i) => `FISH Export.wasm.br.part${i}`);
+      const DATA_CHUNKS = [
+        ...Array.from({ length: 11 }, (_, i) => `FISH Export.data.part1.br.part${i}`),
+        ...Array.from({ length: 11 }, (_, i) => `FISH Export.data.part2.br.part${i}`)
+      ];
+
+      const canvas = document.getElementById("unity-canvas");
+      const overlay = document.getElementById("loader-overlay");
+      const progressFill = document.getElementById("progress-fill");
+      const statusText = document.getElementById("loader-status");
+      const warningBanner = document.getElementById("unity-warning");
+      const errorBox = document.getElementById("error-box");
+      const retryBtn = document.getElementById("retry-btn");
+      let unityInstanceRef = null;
+
+      // 1. Web Audio Auto-Unlock
+      (function () {
+        const audioCtxs = [];
+        const OrigAudioContext = window.AudioContext || window.webkitAudioContext;
+        if (OrigAudioContext) {
+          const PatchedAudioContext = function (opts) {
+            const ctx = new OrigAudioContext(opts);
+            audioCtxs.push(ctx);
+            return ctx;
+          };
+          PatchedAudioContext.prototype = OrigAudioContext.prototype;
+          window.AudioContext = PatchedAudioContext;
+          if (window.webkitAudioContext) window.webkitAudioContext = PatchedAudioContext;
+
+          const resumeAll = () => {
+            audioCtxs.forEach((c) => {
+              if (c && c.state === "suspended") c.resume().catch(() => {});
+            });
+          };
+          window.addEventListener("pointerdown", resumeAll, { passive: true });
+          window.addEventListener("keydown", resumeAll, { passive: true });
+        }
+      })();
+
+      // 2. Pointer Lock Error Guard
+      (function () {
+        const origLock = Element.prototype.requestPointerLock || function () {};
+        Element.prototype.requestPointerLock = function () {
+          try {
+            const res = origLock.apply(this, arguments);
+            if (res && typeof res.catch === "function") res.catch(() => {});
+            return res;
+          } catch (e) {}
+        };
+      })();
+
+      // 3. Redirect Relative StreamingAssets / TemplateData Requests to jsDelivr
+      (function () {
+        const origFetch = window.fetch;
+        window.fetch = function (input, init) {
+          if (typeof input === "string" && !/^(https?:|blob:|data:)/i.test(input)) {
+            const clean = input.replace(/^\.?\//, "");
+            input = REPO_ROOT + "/" + clean.split("/").map(encodeURIComponent).join("/");
+          }
+          return origFetch.call(this, input, init);
+        };
+
+        const origOpen = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function (method, url) {
+          if (typeof url === "string" && !/^(https?:|blob:|data:)/i.test(url)) {
+            const clean = url.replace(/^\.?\//, "");
+            arguments[1] = REPO_ROOT + "/" + clean.split("/").map(encodeURIComponent).join("/");
+          }
+          return origOpen.apply(this, arguments);
+        };
+      })();
+
+      // 4. HUD Controls (about:blank Cloaker & Fullscreen)
+      function openCloaked() {
+        const btn = document.getElementById("btn-ab");
+        const win = window.open("about:blank", "_blank");
+        if (!win || win.closed) {
+          btn.textContent = "Allow Popups!";
+          setTimeout(() => { btn.textContent = "about:blank"; }, 3000);
+          return;
+        }
+        const clone = document.documentElement.cloneNode(true);
+        const ab = clone.querySelector("#btn-ab");
+        if (ab) ab.remove();
+        win.document.open();
+        win.document.write("<!DOCTYPE html>\n" + clone.outerHTML);
+        win.document.close();
+      }
+
+      function toggleFullscreen() {
+        if (unityInstanceRef) {
+          unityInstanceRef.SetFullscreen(1);
+          return;
+        }
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      }
+
+      function unityShowBanner(msg, type) {
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? "block" : "none";
+        }
+        const div = document.createElement("div");
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type === "error") {
+          div.style = "background: red; color: #fff; padding: 10px;";
+        } else {
+          if (type === "warning") div.style = "background: yellow; color: #000; padding: 10px;";
+          setTimeout(() => {
+            if (div.parentNode === warningBanner) warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
+
+      function showError(msg) {
+        errorBox.style.display = "block";
+        errorBox.textContent = msg;
+        retryBtn.style.display = "inline-block";
+      }
+
+      // 5. Brotli Decoder (for .framework.js.br & .wasm.br, with raw passthrough fallback)
+      let cachedDecoder = null;
+      async function getBrotliDecoder() {
+        if (cachedDecoder) return cachedDecoder;
+        const mod = await import("https://esm.sh/brotli@1.3.3/dec/decode.js");
+        const decodeFn =
+          mod.BrotliDecompressBuffer ||
+          (mod.default && mod.default.BrotliDecompressBuffer) ||
+          mod.BrotliDecompress ||
+          (mod.default && mod.default.BrotliDecompress);
+        if (typeof decodeFn !== "function") {
+          throw new Error("Could not initialize Brotli decoder.");
+        }
+        cachedDecoder = decodeFn;
+        return cachedDecoder;
+      }
+
+      async function tryBrotliDecompress(uint8) {
+        try {
+          const decode = await getBrotliDecoder();
+          return decode(uint8);
+        } catch (e) {
+          // If the file is already uncompressed despite the .br extension, return raw bytes
+          return uint8;
+        }
+      }
+
+      async function fetchDecompressedAsset(filename, mimeType, label) {
+        const url = `${CDN_BUILD}/${encodeURIComponent(filename)}`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Failed to fetch ${filename} (HTTP ${res.status})`);
+        const compressed = new Uint8Array(await res.arrayBuffer());
+        statusText.textContent = `Preparing ${label}...`;
+        const raw = await tryBrotliDecompress(compressed);
+        return URL.createObjectURL(new Blob([raw], { type: mimeType }));
+      }
+
+      async function fetchSplitWasmBlob() {
+        const tasks = WASM_CHUNKS.map((chunkName) => {
+          const url = `${CDN_BUILD}/${encodeURIComponent(chunkName)}`;
+          return fetch(url).then(async (res) => {
+            if (!res.ok) throw new Error(`Chunk ${chunkName} failed (HTTP ${res.status})`);
+            return new Uint8Array(await res.arrayBuffer());
+          });
+        });
+
+        const parts = await Promise.all(tasks);
+        const totalLen = parts.reduce((acc, p) => acc + p.byteLength, 0);
+        const merged = new Uint8Array(totalLen);
+        let offset = 0;
+        for (const p of parts) {
+          merged.set(p, offset);
+          offset += p.byteLength;
+        }
+
+        const raw = await tryBrotliDecompress(merged);
+        return URL.createObjectURL(new Blob([raw], { type: "application/wasm" }));
+      }
+
+      // Data chunks are already raw uncompressed UnityWebData1.0 (382 MB) — stitch directly!
+      async function fetchRawSplitDataBlob() {
+        let completed = 0;
+        const tasks = DATA_CHUNKS.map((chunkName) => {
+          const url = `${CDN_BUILD}/${encodeURIComponent(chunkName)}`;
+          return fetch(url).then(async (res) => {
+            if (!res.ok) throw new Error(`Chunk ${chunkName} failed (HTTP ${res.status})`);
+            const buf = await res.arrayBuffer();
+            completed++;
+            progressFill.style.width = `${(completed / DATA_CHUNKS.length) * 75}%`;
+            statusText.textContent = `Downloading game data (${completed}/${DATA_CHUNKS.length})...`;
+            return buf;
+          });
+        });
+
+        const buffers = await Promise.all(tasks);
+        return URL.createObjectURL(new Blob(buffers, { type: "application/octet-stream" }));
+      }
+
+      // 6. Boot Unity WebGL
+      (async function boot() {
+        try {
+          statusText.textContent = `Downloading game data (0/${DATA_CHUNKS.length})...`;
+
+          const [frameworkUrl, codeUrl, dataUrl] = await Promise.all([
+            fetchDecompressedAsset("FISH Export.framework.js.br", "application/javascript", "framework"),
+            fetchSplitWasmBlob(),
+            fetchRawSplitDataBlob()
+          ]);
+
+          statusText.textContent = "Loading Unity runtime...";
+          progressFill.style.width = "80%";
+
+          const loaderScript = document.createElement("script");
+          loaderScript.src = `${CDN_BUILD}/${encodeURIComponent("FISH Export.loader.js")}`;
+          loaderScript.onload = async () => {
+            try {
+              const config = {
+                arguments: [],
+                dataUrl: dataUrl,
+                frameworkUrl: frameworkUrl,
+                codeUrl: codeUrl,
+                streamingAssetsUrl: `${REPO_ROOT}/StreamingAssets`,
+                companyName: "dmcaguy",
+                productName: "FISH",
+                productVersion: "5.0",
+                showBanner: unityShowBanner,
+              };
+
+              unityInstanceRef = await createUnityInstance(canvas, config, (p) => {
+                const pct = Math.round(80 + p * 20);
+                progressFill.style.width = `${pct}%`;
+                statusText.textContent = `Starting WebGL engine (${pct}%)...`;
+              });
+
+              URL.revokeObjectURL(dataUrl);
+              URL.revokeObjectURL(frameworkUrl);
+              URL.revokeObjectURL(codeUrl);
+              overlay.style.opacity = "0";
+              setTimeout(() => overlay.remove(), 350);
+              canvas.focus();
+            } catch (err) {
+              showError(err.message || String(err));
+            }
+          };
+          loaderScript.onerror = () => showError("Failed to load FISH Export.loader.js from jsDelivr.");
+          document.body.appendChild(loaderScript);
+        } catch (err) {
+          showError(err.message || String(err));
+        }
+      })();
+    </script>
+  </body>
+</html>
